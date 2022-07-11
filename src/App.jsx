@@ -23,6 +23,22 @@ export const App = () => {
     setImcompleteTodos(newTodos);
   };
 
+  const onClickComplete = (index) => {
+    const newImcompleteTodos = [...imcompleteTodos];
+    newImcompleteTodos.splice(index, 1);
+    const newCompleteTodos = [...completeTodos, imcompleteTodos[index]];
+    setImcompleteTodos(newImcompleteTodos);
+    setCompleteTodos(newCompleteTodos);
+  };
+
+  const onClickBack = (index) => {
+    const newCompleteTodos = [...completeTodos];
+    newCompleteTodos.splice(index, 1);
+    const newImcompleteTodos = [...imcompleteTodos, completeTodos[index]];
+    setCompleteTodos(newCompleteTodos);
+    setImcompleteTodos(newImcompleteTodos);
+  };
+
   return (
     <>
       <div className="input-area">
@@ -41,7 +57,7 @@ export const App = () => {
               <li key={index}>
                 <div className="list-row">
                   <p className="li-title">{todo}</p>
-                  <button>完了</button>
+                  <button onClick={() => onClickComplete(index)}>完了</button>
                   <button onClick={() => onClickDelete(index)}>削除</button>
                 </div>
               </li>
@@ -57,8 +73,7 @@ export const App = () => {
               <li key={index}>
                 <div className="list-row">
                   <p className="li-title">{todo}</p>
-                  <button>完了</button>
-                  <button>削除</button>
+                  <button onClick={() => onClickBack(index)}>戻す</button>
                 </div>
               </li>
             );
