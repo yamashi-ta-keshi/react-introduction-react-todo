@@ -3,7 +3,7 @@ import "./styles.css";
 
 export const App = () => {
   const [todoText, setTodoText] = useState("");
-  const [imcompleteTodos, setImcompleteTodos] = useState([
+  const [incompleteTodos, setIncompleteTodos] = useState([
     "あああああ",
     "いいいいい"
   ]);
@@ -12,31 +12,33 @@ export const App = () => {
   const onChangeTodoText = (event) => setTodoText(event.target.value);
 
   const onClickAdd = () => {
-    const newTodos = [...imcompleteTodos, todoText];
-    setImcompleteTodos(newTodos);
+    const newTodos = [...incompleteTodos, todoText];
+    setIncompleteTodos(newTodos);
     setTodoText("");
   };
 
   const onClickDelete = (index) => {
-    const newTodos = [...imcompleteTodos];
+    const newTodos = [...incompleteTodos];
     newTodos.splice(index, 1);
-    setImcompleteTodos(newTodos);
+    setIncompleteTodos(newTodos);
   };
 
   const onClickComplete = (index) => {
-    const newImcompleteTodos = [...imcompleteTodos];
+    const newImcompleteTodos = [...incompleteTodos];
     newImcompleteTodos.splice(index, 1);
-    const newCompleteTodos = [...completeTodos, imcompleteTodos[index]];
-    setImcompleteTodos(newImcompleteTodos);
+
+    const newCompleteTodos = [...completeTodos, incompleteTodos[index]];
+    setIncompleteTodos(newImcompleteTodos);
     setCompleteTodos(newCompleteTodos);
   };
 
   const onClickBack = (index) => {
     const newCompleteTodos = [...completeTodos];
     newCompleteTodos.splice(index, 1);
-    const newImcompleteTodos = [...imcompleteTodos, completeTodos[index]];
+
+    const newImcompleteTodos = [...incompleteTodos, completeTodos[index]];
     setCompleteTodos(newCompleteTodos);
-    setImcompleteTodos(newImcompleteTodos);
+    setIncompleteTodos(newImcompleteTodos);
   };
 
   return (
@@ -52,7 +54,7 @@ export const App = () => {
       <div className="imcomplete-area">
         <p>未完了のTODO</p>
         <ul>
-          {imcompleteTodos.map((todo, index) => {
+          {incompleteTodos.map((todo, index) => {
             return (
               <li key={index}>
                 <div className="list-row">
